@@ -1,9 +1,6 @@
 import { sendNotificationToQueue } from '../notifications/notificationProducer';
 import { logger } from '../utils/logger';  // Import the logger
 
-/**
- * Notify a user by sending a message to the notification queue.
- */
 export const notifyUser = async (userId: string, message: string) => {
   const notification = {
     userId,
@@ -32,17 +29,3 @@ export const notifyUser = async (userId: string, message: string) => {
 };
 
 
-
-
-// import { sendNotificationToQueue } from '../notifications/notificationProducer';
-
-// export const notifyUser = async (userId: string, message: string) => {
-//   const notification = {
-//     userId,
-//     message,
-//     timestamp: new Date().toISOString(),
-//   };
-
-//   await sendNotificationToQueue(notification.userId, notification.message);
-//   ;
-// };

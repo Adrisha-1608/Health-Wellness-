@@ -4,14 +4,10 @@ import { signToken } from '../utils/jwtUtils';
 import redisClient from '../config/redisClient';
 import { User } from '../models/userModel';
 import { logger } from '../utils/logger';
-
 import { sendSuccessResponse, sendErrorResponse } from '../common/response/response.message';
 import { HTTP_CODES } from '../common/statuscodes/httpStatusCodes'; 
 import { ErrorMessages, SuccessMessages } from '../common/statuscodes/status message';
 
-/**
- * Register a new user.
- */
 export const register = async (req: Request, res: Response): Promise<void> => {
   const { username, password } = req.body;
 
@@ -45,9 +41,6 @@ export const register = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-/**
- * Login an existing user.
- */
 export const login = async (req: Request, res: Response): Promise<void> => {
   const { username, password } = req.body;
 
@@ -72,9 +65,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-/**
- * Logout the user by invalidating the token.
- */
+
 export const logout = async (req: Request, res: Response): Promise<void> => {
   const token = req.token;
   if (token) {
@@ -93,9 +84,6 @@ export const logout = async (req: Request, res: Response): Promise<void> => {
   sendSuccessResponse(res, SuccessMessages.LOGGED_OUT);
 };
 
-/**
- * Update the user's profile.
- */
 export const updateProfile = async (req: Request, res: Response): Promise<void> => {
   try {
     const userId = req.user?.id;
@@ -131,92 +119,6 @@ export const updateProfile = async (req: Request, res: Response): Promise<void> 
   }
 };
 
-
-
-
-
-
-
-
-// import { Request, Response } from 'express';
-// import bcrypt from 'bcrypt';
-// import { signToken } from '../utils/jwtUtils';
-// import redisClient from '../config/redisClient';
-// import { User } from '../models/userModel'; 
-
-// export const register = async (req: Request, res: Response) :Promise<void> => {
-//   const { username, password } = req.body;
-
-//   if (!username || !password) {
-//     res.status(400).json({ message: 'Username and password are required' });
-    
-//   }
-
-//   const existingUser = await User.findOne({ username });
-//   if (existingUser) {
-//     res.status(400).json({ message: 'Username already exists' });
-//     return;
-//   }
-
-//   const hashedPassword = await bcrypt.hash(password, 10);
-//   const newUser = new User({ username, password: hashedPassword });
-
-//   await newUser.save();
-//   res.status(201).json({ message: 'Registered successfully' });
-// };
-
-// export const login = async (req: Request, res: Response) :Promise<void>=> {
-//   const { username, password } = req.body;
-
-//   const user = await User.findOne({ username });
-//   if (!user || !(await bcrypt.compare(password, user.password))) {
-//     res.status(401).json({ message: 'Invalid credentials' });
-//     return;
-//   }
-
-//   const token = signToken({ id: user._id, username: user.username });
-//   res.json({ token });
-// };
-
-// export const logout = async (req: Request, res: Response) :Promise<void>=> {
-//   const token = req.token;
-//   if (token) {
-//     await redisClient.set(`bl_${token}`, '1');
-//   }
-//   res.json({ message: 'Logged out successfully' });
-// };
-
-
-// export const updateProfile = async (req: Request, res: Response): Promise<void> => {
-//   try {
-//     const userId = req.user?.id;  // Assuming you have a way to get the logged-in user's ID from the request
-//     const { name, email, ...otherFields } = req.body;  // Adjust fields based on what the profile contains
-
-//     if (!userId) {
-//       res.status(400).json({ message: 'User not found' });
-//       return;
-//     }
-
-//     // Update the user's profile
-//     const updatedUser = await User.findByIdAndUpdate(
-//       userId,
-//       { name, email, ...otherFields },  // Update only the fields provided in the body
-//       { new: true } // Returns the updated user object
-//     );
-
-//     if (!updatedUser) {
-//       res.status(404).json({ message: 'User not found' });
-//       return;
-//     }
-
-//    res.status(200).json({ message: 'Profile updated successfully', user: updatedUser });
-//    return;
-//   } catch (error) {
-//     console.error(error);
-//      res.status(500).json({ message: 'Internal server error' });
-     
-//   }
-// };
 
 
 

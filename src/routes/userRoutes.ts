@@ -3,8 +3,7 @@ import { createJob, getUserJobs } from '../services/userService';
 import { authMiddleware } from '../Middleware/authMiddleware';
 const router = express.Router();
 
-// Define routes for creating and fetching jobs
-router.post('/job', authMiddleware, createJob);  // POST: Create a job
-router.get('/jobs', authMiddleware, getUserJobs);  // GET: Fetch all user jobs
+router.post('/job', authMiddleware, createJob);  
+router.get('/jobs', authMiddleware, getUserJobs); 
 
 export default router;

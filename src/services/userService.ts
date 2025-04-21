@@ -4,11 +4,8 @@ import { scheduleReminder } from '../jobs/jobScheduler';
 import { sendSuccessResponse, sendErrorResponse } from '../common/response/response.message';
 import { HTTP_CODES } from '../common/statuscodes/httpStatusCodes'; 
 import { ErrorMessages, SuccessMessages } from '../common/statuscodes/status message';
-import { logger } from '../utils/logger'; // Import the logger
+import { logger } from '../utils/logger'; 
 
-/**
- * Create a new job based on user input and schedule it.
- */
 export const createJob = async (req: Request, res: Response): Promise<void> => {
   const userId = req.user?.id;
   const { type, time } = req.body;
@@ -34,9 +31,6 @@ export const createJob = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-/**
- * Retrieve the list of scheduled jobs for the user.
- */
 export const getUserJobs = async (req: Request, res: Response): Promise<void> => {
   const userId = req.user?.id;
 
@@ -64,53 +58,6 @@ export const getUserJobs = async (req: Request, res: Response): Promise<void> =>
 
 
 
-
-
-
-
-
-// import { Request, Response } from 'express';
-// import ScheduledJob from '../models/ScheduledJob';
-// import { scheduleReminder } from '../jobs/jobScheduler';
-
-// /**
-//  * Create a new job based on user input and schedule it.
-//  */
-// export const createJob = async (req: Request, res: Response): Promise<void> => {
-//   const userId = req.user?.id;
-//   const { type, time } = req.body;
-
-//   // Validate the required fields
-//   if (!userId || !type || !time) {
-//     res.status(400).json({ message: 'Missing required fields' });
-//     return;
-//   }
-
-//   try {
-//     // Schedule the reminder job for the user
-//     await scheduleReminder(userId, type, time);
-//     res.status(201).json({ message: 'Job scheduled successfully' });
-//   } catch (error) {
-//     res.status(500).json({ message: 'Internal server error', error });
-//   }
-// };
-
-
-// export const getUserJobs = async (req: Request, res: Response): Promise<void> => {
-//   const userId = req.user?.id;
-//   if (!userId) {
-//     res.status(401).json({ message: 'Unauthorized' });
-//     return;
-//   }
-
-//   try {
-//     // Fetch scheduled jobs from the database
-//     const jobs = await ScheduledJob.find({ userId });
-//     res.json(jobs);
-//   } catch (error) {
-//     res.status(500).json({ message: 'Error retrieving jobs', error });
-//   }
-// };
 
 
 

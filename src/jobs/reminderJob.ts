@@ -7,13 +7,13 @@ export const reminderJob = async (userId: string, type: string) => {
   await sendNotificationToQueue(userId, message);
 };
 
-// Scheduling function using ISO 8601 time format
+// Scheduling function
 const scheduleJob = (time: string) => {
   try {
     // Schedule the job using the ISO time string
     const job = schedule.scheduleJob(new Date(time), async () => {
       const userId = 'global'; 
-      const type = 'hydration'; // Type of reminder
+      const type = 'hydration'; 
       await reminderJob(userId, type);  // Call the reminder job function
     });
 
@@ -23,8 +23,8 @@ const scheduleJob = (time: string) => {
   }
 };
 
-// Example of scheduling a job using an ISO formatted time
-scheduleJob('2025-04-18T17:00:00.000Z');  // This is where the job will run
+// Example 
+scheduleJob('2025-04-18T17:00:00.000Z');
 
 
 

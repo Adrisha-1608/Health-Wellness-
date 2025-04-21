@@ -5,16 +5,13 @@ export const startNotificationConsumer = async () => {
   const channel = await connection.createChannel();
   const queue = 'notifications';
 
-  await channel.assertQueue(queue, { durable: false });
+  await channel.assertQueue(queue, { durable: true });
 
   channel.consume(queue, (msg) => {
     if (msg !== null) {
       const content = msg.content.toString();
       const notification = JSON.parse(content);
-      console.log('📨 Received notification:', notification);
-
-      // Add your real notification handling logic here (email, push, etc.)
-
+      console.log('Received notification:', notification);
       channel.ack(msg);
     }
   });

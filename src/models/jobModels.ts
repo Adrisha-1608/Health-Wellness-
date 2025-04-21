@@ -12,7 +12,7 @@ const jobSchema = new mongoose.Schema({
     required: true,
   },
   time: {
-    type: String, // Cron format like "0 9 * * *"
+    type: String, 
     required: true,
   },
   active: {

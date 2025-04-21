@@ -4,10 +4,9 @@ import { addGoal, fetchGoals, editGoal } from '../controller/goalcontroller';
 
 const router = express.Router();
 
-// Change the path to /api/goals to match the Swagger documentation
-router.post('/', authMiddleware, addGoal); // POST /api/goals
-router.get('/', authMiddleware, fetchGoals); // GET /api/goals
-router.put('/:id', authMiddleware, editGoal); // PUT /api/goals/:id
+router.post('/', authMiddleware, addGoal); 
+router.get('/', authMiddleware, fetchGoals); 
+router.put('/:id', authMiddleware, editGoal);
 
 export default router;
 

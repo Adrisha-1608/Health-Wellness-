@@ -28,7 +28,7 @@ export const authMiddleware = async (
   }
 
   const token = authHeader.split(' ')[1];
-  console.log('Token received:', token); // Debugging log
+  console.log('Token received:', token); 
 
   const isBlacklisted = await redisClient.get(`bl_${token}`);
   if (isBlacklisted) {
@@ -39,7 +39,7 @@ export const authMiddleware = async (
 
   try {
     const decoded = verifyToken(token);
-    console.log('Decoded token:', decoded); // Debugging log
+    console.log('Decoded token:', decoded);
     req.user = decoded;
     req.token = token;
     next();
@@ -48,59 +48,6 @@ export const authMiddleware = async (
     sendErrorResponse(res, ErrorMessages.INVALID_TOKEN, HTTP_CODES.UNAUTHORIZED);
   }
 };
-
-
-
-
-
-
-
-
-// import { Request, Response, NextFunction } from 'express';
-// import { verifyToken } from '../utils/jwtUtils';
-// import redisClient from '../config/redisClient';
-
-// declare global {
-//   namespace Express {
-//     interface Request {
-//       user?: { id: string; username: string };
-//       token?: string;
-//     }
-//   }
-// }
-
-// export const authMiddleware = async (req: Request, res: Response, next: NextFunction) :Promise<void> => {
-//   const authHeader = req.headers.authorization;
-
-//   if (!authHeader?.startsWith('Bearer ')) {
-//     console.error('No Bearer token found in headers');
-//     res.status(401).json({ message: 'No token provided' });
-//     return;
-//   }
-
-//   const token = authHeader.split(' ')[1];
-//   console.log('Token received:', token); 
-
-//   const isBlacklisted = await redisClient.get(`bl_${token}`);
-//   if (isBlacklisted) {
-//     console.error('Token is blacklisted');
-//     res.status(401).json({ message: 'Token is blacklisted' });
-//     return;
-//   }
-
-//   try {
-//     const decoded = verifyToken(token);
-//     console.log('Decoded token:', decoded); // Debugging log
-//     req.user = decoded;
-//     req.token = token;
-//     next();
-//   } catch (error) {
-//     console.error('Error verifying token:', error);
-//     res.status(401).json({ message: 'Invalid token' });
-//     return;
-//   }
-// };
-
 
 
 
