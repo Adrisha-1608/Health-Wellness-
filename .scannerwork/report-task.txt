@@ -1,0 +1,6 @@
+projectKey=health_app_backend
+serverUrl=http://localhost:9000
+serverVersion=25.4.0.105899
+dashboardUrl=http://localhost:9000/dashboard?id=health_app_backend
+ceTaskId=79c880b0-f9cb-4050-bdde-aa91e6f674d2
+ceTaskUrl=http://localhost:9000/api/ce/task?id=79c880b0-f9cb-4050-bdde-aa91e6f674d2
